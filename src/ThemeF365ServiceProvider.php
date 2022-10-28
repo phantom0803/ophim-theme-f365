@@ -106,11 +106,11 @@ class ThemeF365ServiceProvider extends ServiceProvider
                                     <div class="views-row views-row-1" style="width: 100%;text-align: center;">
                                         <div class="logo-footer">
                                             <a href=""><img alt="logo" style="width: 146px;"
-                                                    src="/themes/f365/images/logo.svg" /></a>
+                                                    src="https://ophim.cc/logo-ophim-5.png" /></a>
                                         </div>
                                         <div class="copy-right">
                                             <p>Copyright ® 2021 OPHIMCMS All Rights Reserved.</p>
-                                            <p><a href="/sitemap.xml">Sitemap</a> | <a href="{{ route('post.contact')}}">Liên hệ</a> | <a
+                                            <p><a href="/sitemap.xml">Sitemap</a> | <a href="">Liên hệ</a> | <a
                                                     href="/danh-sach/phim-moi.html">Phim Mới </a> | <a href="" target="_blank"
                                                     title="">Phim Hay </a></p><br>
                                         </div>
