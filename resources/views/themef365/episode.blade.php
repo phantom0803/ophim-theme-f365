@@ -196,24 +196,25 @@
     </script>
 
     <script>
+        var episode_id = {{$episode->id}};
         const wrapper = document.getElementById('media-player');
         const vastAds = "{{ Setting::get('jwplayer_advertising_file') }}";
 
         function chooseStreamingServer(el) {
             const type = el.dataset.type;
-            const link = el.dataset.link;
+            const link = el.dataset.link.replace(/^http:\/\//i, 'https://');
             const id = el.dataset.id;
 
             const newUrl =
                 location.protocol +
                 "//" +
                 location.host +
-                location.pathname +
-                "?id=" + id;
+                location.pathname.replace(`-${episode_id}`, `-${id}`);
 
             history.pushState({
                 path: newUrl
             }, "", newUrl);
+            episode_id = id;
 
 
             Array.from(document.getElementsByClassName('streaming-server')).forEach(server => {
@@ -225,7 +226,6 @@
             el.classList.add('btn-danger');
             el.getElementsByClassName('link_playing')[0].style.display = "inline-block";
 
-            link.replace('http://', 'https://');
             renderPlayer(type, link, id);
         }
 
@@ -416,9 +416,7 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const queryString = window.location.search;
-            const urlParams = new URLSearchParams(queryString);
-            const episode = urlParams.get('id')
+            const episode = '{{$episode->id}}';
             let playing = document.querySelector(`[data-id="${episode}"]`);
             if (playing) {
                 playing.click();
@@ -433,8 +431,8 @@
     </script>
 
     <script>
-        $("#report_episode_btn").click(() => {
-            fetch("{{ route('episodes.report', ['movie' => $currentMovie->slug, 'episode' => $episode->slug]) }}", {
+        $("#btn_report").click(() => {
+            fetch("{{ route('episodes.report', ['movie' => $currentMovie->slug, 'episode' => $episode->slug, 'id' => $episode->id]) }}", {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -442,14 +440,10 @@
                         'content')
                 },
                 body: JSON.stringify({
-                    message: document.getElementById('report_message')
-                        .innerHTML ??
-                        ''
+                    message: ''
                 })
             });
-            $("#modal-report").toggle("hidden");
-            $("#modal-report-backdrop").toggle("hidden");
-            $("#toggleModal-report").remove();
+            $("#btn_report").remove();
         })
     </script>
 
