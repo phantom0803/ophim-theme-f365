@@ -61,7 +61,7 @@
                             <p class="name" style="text-transform: uppercase!important;">{{$movie->name}}</p>
                             <p class="real-name">{{$movie->origin_name}} {{$movie->publish_year}}</p>
                         </div>
-                        <img src="{{$movie->poster_url}}"
+                        <img src="{{$movie->getPosterUrl()}}"
                             alt="{{$movie->name}}">
                     </a>
                 </li>

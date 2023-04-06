@@ -12,7 +12,7 @@
         <div class="poster">
             <a href="{{$watchUrl}}">
                 <img alt="{{$currentMovie->name}}"
-                    src="{{$currentMovie->thumb_url}}" />
+                    src="{{$currentMovie->getThumbUrl()}}" />
             </a>
             <ul class="buttons">
                 @if ($currentMovie->trailer_url)
@@ -117,10 +117,10 @@
                                 data-rurl="{{$currentMovie->getUrl()}}" class="twitter dt_social"
                                 style="color: #fbfbfb;"><b>Twitter</b></a><a data-id="{{$currentMovie->id}}" rel="nofollow"
                                 href="javascript: void(0);"
-                                onclick="window.open(&quot;https://pinterest.com/pin/create/button/?url={{$currentMovie->getUrl()}}&amp;media={{$currentMovie->thumb_url}}&amp;description={{$currentMovie->name}}&quot;,&quot;pinterest&quot;,&quot;toolbar=0, status=0, width=650, height=450&quot;)"
+                                onclick="window.open(&quot;https://pinterest.com/pin/create/button/?url={{$currentMovie->getUrl()}}&amp;media={{$currentMovie->getThumbUrl()}}&amp;description={{$currentMovie->name}}&quot;,&quot;pinterest&quot;,&quot;toolbar=0, status=0, width=650, height=450&quot;)"
                                 class="pinterest dt_social" style="color: #fbfbfb;"><b>Pinterest</b></a><a data-id="{{$currentMovie->id}}"
                                 rel="nofollow" href="javascript: void(0);"
-                                onclick="window.open(&quot;https://telegram.me/share/url?url={{$currentMovie->getUrl()}}&amp;media={{$currentMovie->thumb_url}}&amp;description={{$currentMovie->name}}&quot;,&quot;telegram&quot;,&quot;toolbar=0, status=0, width=650, height=450&quot;)"
+                                onclick="window.open(&quot;https://telegram.me/share/url?url={{$currentMovie->getUrl()}}&amp;media={{$currentMovie->getThumbUrl()}}&amp;description={{$currentMovie->name}}&quot;,&quot;telegram&quot;,&quot;toolbar=0, status=0, width=650, height=450&quot;)"
                                 class="telagram dt_social" style="color: #fbfbfb;"><b>Telegram</b></a></div>
                     </div>
                 </li>
@@ -129,21 +129,21 @@
                         <div class="rate-title">
                             <span class="rate-lable"></span>
                         </div>
-                        <div id="star" data-score="{{ number_format($currentMovie->rating_star ?? 0, 1) }}" style="cursor: pointer;">
+                        <div id="star" data-score="{{$currentMovie->getRatingStar()}}" style="cursor: pointer;">
                         </div>
                         <div>
                             <div id="div_average" style="float: left; line-height: 16px; margin: 0 5px;margin-top: 5px; ">
                                 <span class="average" id="average" itemprop="ratingValue">
-                                    {{ number_format($currentMovie->rating_star ?? 0, 1) }}
+                                    {{$currentMovie->getRatingStar()}}
                                 </span>
                                 <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                                <span id="rate_count" itemprop="reviewCount">{{ $currentMovie->rating_count ?? 0 }}</span> lượt đánh giá
+                                <span id="rate_count" itemprop="reviewCount">{{$currentMovie->getRatingCount()}}</span> lượt đánh giá
                             </div>
                             <span id="hint"></span>
                             <meta itemprop="bestRating" content="10" />
                             <meta itemprop="worstRating" content="1" />
-                            <meta itemprop="ratingValue" content="{{ number_format($currentMovie->rating_star ?? 0, 1) }}" />
-                            <meta itemprop="ratingCount" content="{{ $currentMovie->rating_count ?? 0 }}" />
+                            <meta itemprop="ratingValue" content="{{$currentMovie->getRatingStar()}}" />
+                            <meta itemprop="ratingCount" content="{{$currentMovie->getRatingCount()}}" />
                         </div>
                     </div>
                 </li>
@@ -161,7 +161,7 @@
                 <p>Hãy xem phim để cảm nhận...</p>
             @endif
             @if ($currentMovie->poster_url)
-                <p><img alt="" src="{{$currentMovie->poster_url}}" /></p>
+                <p><img alt="" src="{{$currentMovie->getPosterUrl()}}" /></p>
             @endif
         </div>
     </div>
@@ -198,7 +198,7 @@
     <script>
         var rated = false;
         $('#star').raty({
-            score: {{ number_format($currentMovie->rating_star ?? 0, 1) }},
+            score: {{$currentMovie->getRatingStar()}},
             number: 10,
             numberMax: 10,
             hints: ['quá tệ', 'tệ', 'không hay', 'không hay lắm', 'bình thường', 'xem được', 'có vẻ hay', 'hay',

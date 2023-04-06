@@ -5,7 +5,7 @@
                 <span class="current-status" style="text-transform: uppercase;font-weight: 500;"><i
                         class="fa fa-play-circle" aria-hidden="true"></i> {{ $movie->episode_current }}</span>
                 <a href="{{ $movie->getUrl() }}" title="{{ $movie->name }}">
-                    <img alt="{{ $movie->name }}" src="{{ $movie->thumb_url }}" />
+                    <img alt="{{ $movie->name }}" src="{{ $movie->getThumbUrl() }}" />
                     <div class="title">
                         <div class="post-title">
                             <span class="label-quality">{{ $movie->language }}</span>

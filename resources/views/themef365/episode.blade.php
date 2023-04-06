@@ -88,23 +88,23 @@
                     <div class="rate-title">
                         <span class="rate-lable"></span>
                     </div>
-                    <div id="star" data-score="{{ number_format($currentMovie->rating_star ?? 0, 1) }}"
+                    <div id="star" data-score="{{$currentMovie->getRatingStar()}}"
                         style="cursor: pointer;">
                     </div><br />
                     <div>
                         <div id="div_average" style="float: left; line-height: 16px; margin: 0 5px;margin-top: 5px; ">
                             <span class="average" id="average" itemprop="ratingValue">
-                                {{ number_format($currentMovie->rating_star ?? 0, 1) }}
+                                {{$currentMovie->getRatingStar()}}
                             </span>
                             <i class="fa fa-bar-chart" aria-hidden="true"></i>
-                            <span id="rate_count" itemprop="reviewCount">{{ $currentMovie->rating_count ?? 0 }}</span> lượt
+                            <span id="rate_count" itemprop="reviewCount">{{$currentMovie->getRatingCount()}}</span> lượt
                             đánh giá
                         </div>
                         <span id="hint"></span>
                         <meta itemprop="bestRating" content="10" />
                         <meta itemprop="worstRating" content="1" />
-                        <meta itemprop="ratingValue" content="{{ number_format($currentMovie->rating_star ?? 0, 1) }}" />
-                        <meta itemprop="ratingCount" content="{{ $currentMovie->rating_count ?? 0 }}" />
+                        <meta itemprop="ratingValue" content="{{$currentMovie->getRatingStar()}}" />
+                        <meta itemprop="ratingCount" content="{{$currentMovie->getRatingCount()}}" />
                     </div>
                 </div>
             </div>
@@ -239,7 +239,7 @@
                         aspectratio: "16:9",
                         width: "100%",
                         height: "100%",
-                        file: "/themes/bptv/player/1s_blank.mp4",
+                        file: "/themes/f365/player/1s_blank.mp4",
                         volume: 100,
                         mute: false,
                         autostart: true,
@@ -290,7 +290,7 @@
                     aspectratio: "16:9",
                     width: "100%",
                     height: "100%",
-                    image: "{{ $currentMovie->poster_url ?: $currentMovie->thumb_url }}",
+                    image: "{{ $currentMovie->getPosterUrl() }}",
                     file: link,
                     playbackRateControls: true,
                     playbackRates: [0.25, 0.75, 1, 1.25],
@@ -450,7 +450,7 @@
     <script>
         var rated = false;
         $('#star').raty({
-            score: {{ number_format($currentMovie->rating_star ?? 0, 1) }},
+            score: {{$currentMovie->getRatingStar()}},
             number: 10,
             numberMax: 10,
             hints: ['quá tệ', 'tệ', 'không hay', 'không hay lắm', 'bình thường', 'xem được', 'có vẻ hay', 'hay',
